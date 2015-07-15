@@ -107,31 +107,33 @@
 		
 		// Get image from browser as it handles ordering of fetching
 		UIImage *img = [self.photoBrowser imageForPhoto:_photo];
-		if (img) {
-            // Hide ProgressView
-            //_progressView.alpha = 0.0f;
+        BOOL isDownloadingImage = [_photo isDownloadingImage];
+        
+        // Set image
+        _photoImageView.image = img;
+        _photoImageView.hidden = NO;
+        _progressView.alpha = 0.0;
+        
+        if (isDownloadingImage) {
+            [UIView animateWithDuration:0.3 delay:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                _photoImageView.alpha = 0.5;
+                _progressView.alpha = 1.0;
+            } completion:nil];
+        }else{
+            _photoImageView.alpha = 1.0;
             [_progressView removeFromSuperview];
-            
-            // Set image
-			_photoImageView.image = img;
-			_photoImageView.hidden = NO;
-            
-            // Setup photo frame
-			CGRect photoImageViewFrame;
-			photoImageViewFrame.origin = CGPointZero;
-			photoImageViewFrame.size = img.size;
-            
-			_photoImageView.frame = photoImageViewFrame;
-			self.contentSize = photoImageViewFrame.size;
-
-			// Set zoom to minimum zoom
-			[self setMaxMinZoomScalesForCurrentBounds];
-        } else {
-			// Hide image view
-			_photoImageView.hidden = YES;
-            
-            _progressView.alpha = 1.0f;
-		}
+        }
+        
+        // Setup photo frame
+        CGRect photoImageViewFrame;
+        photoImageViewFrame.origin = CGPointZero;
+        photoImageViewFrame.size = img.size;
+        
+        _photoImageView.frame = photoImageViewFrame;
+        self.contentSize = photoImageViewFrame.size;
+        
+        // Set zoom to minimum zoom
+        [self setMaxMinZoomScalesForCurrentBounds];
         
 		[self setNeedsLayout];
 	}

@@ -61,4 +61,9 @@
 // Return nil if there is no placeholder
 - (UIImage *)placeholderImage;
 
+// Return photo URL used to download and cache
+// Return nil if there is no URL
+- (NSURL *)photoURL;
+- (BOOL)isDownloadingImage;
+
 @end

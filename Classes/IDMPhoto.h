@@ -22,8 +22,10 @@ typedef void (^IDMProgressUpdateBlock)(CGFloat progress);
 // Properties
 @property (nonatomic, strong) NSString *caption;
 @property (nonatomic, strong) NSURL *photoURL;
-@property (nonatomic, strong) IDMProgressUpdateBlock progressUpdateBlock;
 @property (nonatomic, strong) UIImage *placeholderImage;
+
+@property (nonatomic, readonly) BOOL isDownloadingImage;
+@property (nonatomic, strong) IDMProgressUpdateBlock progressUpdateBlock;
 
 // Class
 + (IDMPhoto *)photoWithImage:(UIImage *)image;

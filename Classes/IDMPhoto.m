@@ -176,6 +176,10 @@ caption = _caption;
 
 #pragma mark - Async Loading
 
+- (BOOL)isDownloadingImage {
+    return _loadingInProgress;
+}
+
 /*- (UIImage *)decodedImageWithImage:(UIImage *)image {
     CGImageRef imageRef = image.CGImage;
     // System only supports RGB, set explicitly and prevent context error
